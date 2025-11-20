@@ -13,6 +13,21 @@ const Hero: React.FC = () => {
     }
   };
 
+  const handleScrollToProjects = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const element = document.getElementById('projects');
+    if (element) {
+      const headerOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+  };
+
   return (
     <section id="about" className="min-h-screen flex items-center justify-center pt-16 relative overflow-hidden">
       {/* Background Decoration */}
@@ -53,12 +68,15 @@ const Hero: React.FC = () => {
           <div className="flex gap-4">
              <a 
               href="#projects"
-              className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-all duration-300 shadow-lg shadow-blue-600/25"
+              onClick={handleScrollToProjects}
+              className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-all duration-300 shadow-lg shadow-blue-600/25 cursor-pointer"
             >
               View Work
             </a>
             <a 
-              href="#"
+              href="/resume.html"
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-8 py-3 border border-gray-600 hover:border-blue-500 text-gray-300 hover:text-white rounded-lg font-semibold transition-all duration-300 flex items-center gap-2 group"
             >
               <FileText size={18} />

@@ -97,11 +97,20 @@ const Contact: React.FC = () => {
         <div className="mt-20 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm flex flex-col md:flex-row justify-between items-center gap-4">
           <p>© {new Date().getFullYear()} {PROFILE.name}. All rights reserved.</p>
           <div className="flex gap-6">
-            {SOCIAL_LINKS.map((link) => (
-              <a key={link.platform} href={link.url} className="hover:text-white transition-colors">
-                {link.platform}
-              </a>
-            ))}
+            {SOCIAL_LINKS.map((link) => {
+              const isMail = link.url.startsWith('mailto:');
+              return (
+                <a 
+                  key={link.platform} 
+                  href={link.url}
+                  target={isMail ? undefined : "_blank"}
+                  rel={isMail ? undefined : "noopener noreferrer"}
+                  className="hover:text-white transition-colors cursor-pointer"
+                >
+                  {link.platform}
+                </a>
+              );
+            })}
           </div>
         </div>
       </div>
